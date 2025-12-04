@@ -22,9 +22,19 @@
                     gameRunning = false;
                     break;
                 }
-            }
 
-            Console.ReadKey();
+                Console.Write("Kolumn (1-9): ");
+                if (!int.TryParse(Console.ReadLine(), out int c) || c < 1 || c > 9)
+                {
+                    continue;
+                }
+
+                Console.Write("Siffra (1-9): ");
+                if (!int.TryParse(Console.ReadLine(), out int num) || num < 1 || num > 9)
+                {
+                    continue;
+                }
+            }
         }
 
         //
