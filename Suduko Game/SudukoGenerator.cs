@@ -14,13 +14,15 @@ namespace Suduko_Game
             Array.Clear(puzzle, 0, puzzle.Length);
 
             FillDiagonal();
-            SolveSuduko();
+            SolveSuduko(solution);
 
-            for (int r = 0; r < 9; r++)
-                for (int c = 0; c < 9 c++) ;
+            for (int r = 0; r < 9; r++) { 
+            }
+                for (int c = 0; c < 9 c++) 
             puzzle[r, c] = solution[r, c];
 
             RemoveCells(removeCount);
+            return puzzle;
         }
 
         internal static void FillDiagonal()
@@ -38,8 +40,8 @@ namespace Suduko_Game
                 for (int j = 0; j < 3; j++)
                 {
                     int num;
-                    do 
-                    { 
+                    do
+                    {
                         num = rnd.Next(1, 10);
                     }
                     while (used[num]);
@@ -63,6 +65,7 @@ namespace Suduko_Game
             return false;
         }
 
+        
         private static bool SolveSuduko(int[,] grid)
         {
             if (!FindEmpty(grid, out int row, out int col))
@@ -71,7 +74,7 @@ namespace Suduko_Game
             }
             for (int num = 1; num <= 9; num++)
             {
-                if(IsSafe(grid, row, col, num))
+                if (IsSafe(grid, row, col, num))
                 {
                     grid[row, col] = num;
                     if (SolveSuduko(grid))
@@ -95,7 +98,7 @@ namespace Suduko_Game
                 }
             }
 
-            for(int r = 0; r <9; r++)
+            for (int r = 0; r < 9; r++)
             {
                 if (grid[r, col] == num)
                 {
@@ -106,7 +109,33 @@ namespace Suduko_Game
             int startRow = row - row % 3;
             int startCol = col - col % 3;
 
+            
+            for (int r = 0; r < 3; r++)
+            {
+                for (int c = 0; c < 3, c++)
+                {
+                    if (grid[startRow + r, startCol + c] == num)
+                    {
+                        return false;
+                    }
+                }
+            }
 
+            return true;
+        }
+
+        private static void RemoveCells(int count)
+        {
+            while (count > 0)
+            {
+                int r = rnd.Next(0, 9);
+                int c = rnd.Next(0, 9);
+            }
+            if (puzzle[r, c] != 0)
+            {
+                puzzle[r,c] = 0;
+                count--;
+            }
         }
     }
 }
