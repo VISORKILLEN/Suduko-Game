@@ -8,7 +8,7 @@ namespace Suduko_Game
         static int[,] puzzle = new int[9, 9];
         static Random rnd = new Random();
 
-        internal static void GenerateSuduko()
+        internal static int[,] GenerateSuduko(int removeCount = 40)
         {
             Array.Clear(solution, 0, solution.Length);
             Array.Clear(puzzle, 0, puzzle.Length);
@@ -16,22 +16,28 @@ namespace Suduko_Game
             FillDiagonal();
             SolveSuduko(solution);
 
-            for (int r = 0; r < 9; r++) { 
+            for (int r = 0; r < 9; r++)
+            {
+                for (int c = 0; c < 9; c++)
+                {
+                    puzzle[r, c] = solution[r, c];
+                }
             }
-                for (int c = 0; c < 9 c++) 
-            puzzle[r, c] = solution[r, c];
 
             RemoveCells(removeCount);
             return puzzle;
         }
 
-        internal static void FillDiagonal()
+        private static void FillDiagonal()
         {
-            for (int i = 0; i < 9; i += 3) ;
-            FillBox(i, i);
+            for (int i = 0; i < 9; i += 3)
+            {
+                FillBox(i, i);
+
+            }
         }
 
-        internal static void FillBox(int row, int col)
+        private static void FillBox(int row, int col)
         {
             bool[] used = new bool[10];
 
@@ -65,7 +71,7 @@ namespace Suduko_Game
             return false;
         }
 
-        
+
         private static bool SolveSuduko(int[,] grid)
         {
             if (!FindEmpty(grid, out int row, out int col))
@@ -88,7 +94,35 @@ namespace Suduko_Game
             return false;
         }
 
-        private static bool IsSafe(int[,] grid, int row, int col, int num)
+        internal static bool isSolved(int[,] grid)
+        {
+            for (int r = 0; r < 9; r++)
+            {
+                for (int c = 0; c < 9; c++)
+                {
+                    int num = grid[r, c];
+
+                    if (num == 0)
+                    {
+                        return false;
+                    }
+
+                    grid[r, c] = 0;
+
+                    if (!IsSafe(grid, r, c, num))
+                    {
+                        grid[r, c] = num;
+                        return false;
+                    }
+
+                    grid[r, c] = num;
+                }
+            }
+            return true;
+        }
+
+        //
+        internal static bool IsSafe(int[,] grid, int row, int col, int num)
         {
             for (int c = 0; c < 9; c++)
             {
@@ -109,10 +143,10 @@ namespace Suduko_Game
             int startRow = row - row % 3;
             int startCol = col - col % 3;
 
-            
+
             for (int r = 0; r < 3; r++)
             {
-                for (int c = 0; c < 3, c++)
+                for (int c = 0; c < 3; c++)
                 {
                     if (grid[startRow + r, startCol + c] == num)
                     {
@@ -130,11 +164,12 @@ namespace Suduko_Game
             {
                 int r = rnd.Next(0, 9);
                 int c = rnd.Next(0, 9);
-            }
-            if (puzzle[r, c] != 0)
-            {
-                puzzle[r,c] = 0;
-                count--;
+
+                if (puzzle[r, c] != 0)
+                {
+                    puzzle[r, c] = 0;
+                    count--;
+                }
             }
         }
     }
