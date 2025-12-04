@@ -90,8 +90,23 @@ namespace Suduko_Game
             for (int c = 0; c < 9; c++)
             {
                 if (grid[row, c] == num)
+                {
                     return false;
+                }
             }
+
+            for(int r = 0; r <9; r++)
+            {
+                if (grid[r, col] == num)
+                {
+                    return false;
+                }
+            }
+
+            int startRow = row - row % 3;
+            int startCol = col - col % 3;
+
+
         }
     }
 }
