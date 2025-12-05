@@ -10,12 +10,14 @@ namespace Suduko_Game
 
         internal static int[,] GenerateSuduko(int removeCount = 40)
         {
+            // Initialize grids
             Array.Clear(solution, 0, solution.Length);
             Array.Clear(puzzle, 0, puzzle.Length);
 
             FillDiagonal();
             SolveSuduko(solution);
 
+            // Copy solution to puzzle
             for (int r = 0; r < 9; r++)
             {
                 for (int c = 0; c < 9; c++)
@@ -30,6 +32,7 @@ namespace Suduko_Game
 
         private static void FillDiagonal()
         {
+            // Fill the diagonal 3x3 boxes
             for (int i = 0; i < 9; i += 3)
             {
                 FillBox(i, i);
@@ -41,6 +44,7 @@ namespace Suduko_Game
         {
             bool[] used = new bool[10];
 
+            // Fill the 3x3 box
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -60,6 +64,7 @@ namespace Suduko_Game
 
         private static bool FindEmpty(int[,] grid, out int row, out int col)
         {
+            // Search for an empty cell
             for (row = 0; row < 9; row++)
                 for (col = 0; col < 9; col++)
                     if (grid[row, col] == 0)
@@ -74,6 +79,7 @@ namespace Suduko_Game
 
         private static bool SolveSuduko(int[,] grid)
         {
+            // Find an empty cell
             if (!FindEmpty(grid, out int row, out int col))
             {
                 return true;
@@ -158,6 +164,7 @@ namespace Suduko_Game
             return true;
         }
 
+        //
         private static void RemoveCells(int count)
         {
             while (count > 0)

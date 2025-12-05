@@ -77,7 +77,7 @@ namespace Suduko_Game
             }
         }
 
-        static void RestartGame(bool playing = true)
+        private static void RestartGame(bool playing = true)
         {
             Console.Write("Vill du spela igen? y/n: ");
 
@@ -111,7 +111,7 @@ namespace Suduko_Game
             }
         }
 
-        static void PrintBoard()
+        private static void PrintBoard()
         {
 
             for (int r = 0; r < 9; r++)
