@@ -13,13 +13,13 @@ namespace Suduko_Game
         internal static void Run()
         {
             StartGame();
-
         }
 
         internal static void StartGame()
         {
             Console.Clear();
 
+            
             int[,] board = SudukoGenerator.GenerateSuduko(40);
             bool gameRunning = true;
             while (gameRunning && !SudukoGenerator.isSolved(board))
@@ -86,7 +86,11 @@ namespace Suduko_Game
                 }
                 else if (answer == "n")
                 {
-                    Console.WriteLine("Tack för att du har spelat mitt suduko:");
+                    Console.WriteLine("Tack för att du har spelat mitt suduko!");
+                }
+                else
+                {
+                    Console.WriteLine("Felaktigt val, skriv igen.");
                 }
             }
         }
