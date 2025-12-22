@@ -16,7 +16,7 @@
 
             for (int r = 0; r < 4; r++)
             {
-                for( int c = 0; c < 4; c++)
+                for (int c = 0; c < 4; c++)
                 {
                     puzzle[r, c] = solution[r, c];
                 }
@@ -27,6 +27,34 @@
             return puzzle;
         }
 
+        private static void FillDiagonal()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                FillBox(i, i);
+            }
+        }
+
+        private static void FillBox(int row, int col)
+        {
+            bool[] used = new bool[5];
+
+            for (int i = 0; i < 2; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    int num;
+                    do
+                    {
+                        num = rnd.Next(1, 5);
+                    }
+                    while(used[num]);
+
+                    used[num] = true;
+                    solution[row + i, col + j] = num;
+                }
+            }
+        }
 
 
     }
