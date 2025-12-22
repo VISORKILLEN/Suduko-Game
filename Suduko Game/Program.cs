@@ -12,10 +12,10 @@
                 Console.Clear();
 
                 Console.WriteLine("Välkommen till spelkonsolen\n" +
-                    "Vilken svårihetsgrad vill du köra?\n" +
-                    "1. Enkel\n" +
-                    "2. Vanlig\n" +
-                    "3. Svår\n" +
+                    "Vilket typ av Suduko vill du köra?\n" +
+                    "1. 4x4 Suduko\n" +
+                    "2. 9x9 Suduko\n" +
+                    "3. 16x16 Suduko\n" +
                     "0. Stäng av spelkonsolen");
 
                 int choice;
