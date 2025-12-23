@@ -84,6 +84,8 @@ namespace Suduko_Game
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Grattis! Du har löst Sudokut!");
                 Console.ResetColor();
+                Console.WriteLine("Tryck på valfri knapp för att gå tillbaka till menyn.");
+                Console.ReadKey();
             }
         }
 
@@ -94,7 +96,7 @@ namespace Suduko_Game
 
                 if (r % 2 == 0 && r != 0)
                 {
-                    Console.WriteLine("--+--");
+                    Console.WriteLine("----+----");
                 }
 
                 for (int c = 0; c < 4; c++)
@@ -107,8 +109,6 @@ namespace Suduko_Game
                     Console.Write(val == 0 ? ". " : val + " ");
                 }
                 Console.WriteLine();
-
-
 
             }
 
