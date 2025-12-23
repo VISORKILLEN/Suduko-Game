@@ -12,7 +12,7 @@
             Array.Clear(puzzle, 0, puzzle.Length);
 
             FillDiagonal();
-            //SolveSuduko(solution);
+            Solve4x4Suduko(solution);
 
             for (int r = 0; r < 4; r++)
             {
@@ -22,7 +22,7 @@
                 }
             }
 
-            //RemoveCells(removeCount);
+            RemoveCells(removeCount);
 
             return puzzle;
         }
@@ -84,7 +84,7 @@
                 if(IsSafe(grid, row, col, num))
                 {
                     grid[row, col] = num;
-                    if (SolveSuduko(grid))
+                    if (Solve4x4Suduko(grid))
                     {
                         return true;
                     }
@@ -162,6 +162,20 @@
             return true;
         }
 
+        private static void RemoveCells(int count)
+        {
+            while (count > 0)
+            {
+                int r = rnd.Next(0, 4);
+                int c = rnd.Next(0, 4);
 
-    }
+                if (puzzle[r, c] != 0)
+                {
+                    puzzle[r, c] = 0;
+                    count--;
+                }
+
+            }
+
+        }
 }
