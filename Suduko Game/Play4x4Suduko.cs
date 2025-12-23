@@ -18,7 +18,7 @@
                 Console.Clear();
 
                 bool gameRunning = true;
-                while(gameRunning && !_4x4SudukoGenerator.is4x4Solved(board))
+                while (gameRunning && !_4x4SudukoGenerator.is4x4Solved(board))
                 {
                     Console.Clear();
                     PrintBoard();
@@ -67,9 +67,66 @@
                 SolvedBoard();
                 RestartGame();
             }
+        }
+
+        private static void SolvedBoard()
+        {
+            if (SudukoGenerator.isSolved(board))
+            {
+                Console.Clear();
+                PrintBoard();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Grattis! Du har löst Sudokut!");
+                Console.ResetColor();
+            }
+        }
+
+        private static void RestartGame(bool playing = true)
+        {
+            Console.Write("Vill du spela igen? y/n: ");
+
+            string answer = Console.ReadLine().ToLower();
+
+            if (answer == "y")
+            {
+                Console.Clear();
+            }
+            else if (answer == "n")
+            {
+                Console.WriteLine("Tack för att du har spelat mitt suduko!");
+                playing = false;
+            }
+            else
+            {
+                Console.WriteLine("Felaktigt val, skriv igen.");
+            }
+        }
+
+        private static void PrintBoard()
+        {
+            for (int r = 0; r < 4; r++)
+            {
+
+                if (r % 2 == 0 && r != 0)
+                {
+                    Console.WriteLine("------+-------+------");
+                }
+
+                for (int c = 0; c < 4; c++)
+                {
+                    if (c % 2 == 0 && c != 0)
+                    {
+                        Console.Write("| ");
+                    }
+                    int val = board[r, c];
+                    Console.Write(val == 0 ? ". " : val + " ");
+                }
+                Console.WriteLine();
+
+
+
             }
 
         }
-
     }
 }
