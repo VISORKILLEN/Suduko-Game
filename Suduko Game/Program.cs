@@ -24,6 +24,7 @@
                 switch (choice)
                 {
                     case 1:
+                        Play4x4Suduko.Run();
                         break;
 
                     case 2:

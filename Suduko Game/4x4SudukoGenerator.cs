@@ -74,14 +74,14 @@
         private static bool Solve4x4Suduko(int[,] grid)
         {
             // Find an empty cell
-            if(!FindEmpty(grid, out int row, out int col))
+            if (!FindEmpty(grid, out int row, out int col))
             {
                 return true;
             }
 
-            for (int num = 1; num  <= 4; num++)
+            for (int num = 1; num <= 4; num++)
             {
-                if(IsSafe(grid, row, col, num))
+                if (IsSafe(grid, row, col, num))
                 {
                     grid[row, col] = num;
                     if (Solve4x4Suduko(grid))
@@ -178,4 +178,5 @@
             }
 
         }
+    }
 }
