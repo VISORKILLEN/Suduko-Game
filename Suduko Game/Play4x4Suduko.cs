@@ -29,7 +29,7 @@ namespace Suduko_Game
                 {
                     Console.Clear();
                     PrintBoard();
-                    Console.WriteLine("\nRad 1-4, 0 för att avluta:");
+                    Console.WriteLine("Rad 1-4, 0 för att avluta:");
                     if (!int.TryParse(Console.ReadLine(), out int r) || r < 0 || r > 4)
                     {
                         continue;
@@ -85,7 +85,7 @@ namespace Suduko_Game
                 Console.WriteLine("Grattis! Du har löst Sudokut!");
                 Console.ResetColor();
                 Console.WriteLine("Tryck på valfri knapp för att gå tillbaka till menyn.");
-                Console.ReadKey();
+                Console.ReadLine();
             }
         }
 

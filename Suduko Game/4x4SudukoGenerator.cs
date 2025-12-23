@@ -6,7 +6,7 @@
         static int[,] puzzle = new int[4, 4];
         static Random rnd = new Random();
 
-        internal static int[,] Generate4x4Suduko(int removeCount = 10)
+        internal static int[,] Generate4x4Suduko(int removeCount = 9)
         {
             Array.Clear(solution, 0, solution.Length);
             Array.Clear(puzzle, 0, puzzle.Length);
