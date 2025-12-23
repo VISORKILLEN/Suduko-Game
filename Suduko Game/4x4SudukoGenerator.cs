@@ -122,5 +122,46 @@
             return true;
         }
 
+
+        //Method to check if 
+        internal static bool IsSafe(int[,] grid, int row, int col, int num)
+        {
+            // Check if the number already exists in the same row
+            for (int c = 0; c < 4; c++)
+            {
+                if (grid[row, c] == num)
+                {
+                    return false;
+                }
+            }
+
+            // Check if the number already exists in the same column
+            for (int r = 0; r < 4; r++)
+            {
+                if (grid[r, col] == num)
+                {
+                    return false;
+                }
+            }
+
+            // Calculate the starting row and column of the 2×2 sub-grid
+            int startRow = row - row % 2;
+            int startCol = col - col % 2;
+
+            for (int r = 0; r < 2; r++)
+            {
+                for (int c = 0; c < 2; c++)
+                {
+                    if (grid[startRow + r, startCol + c] == num)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+
     }
 }
