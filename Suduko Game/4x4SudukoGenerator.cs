@@ -12,7 +12,7 @@
             Array.Clear(puzzle, 0, puzzle.Length);
 
             FillDiagonal();
-            SolveSuduko(solution);
+            //SolveSuduko(solution);
 
             for (int r = 0; r < 4; r++)
             {
@@ -22,7 +22,7 @@
                 }
             }
 
-            RemoveCells(removeCount);
+            //RemoveCells(removeCount);
 
             return puzzle;
         }
@@ -39,6 +39,7 @@
         {
             bool[] used = new bool[5];
 
+            // Fill the 2x2 box
             for (int i = 0; i < 2; i++)
             {
                 for (int j = 0; j < 2; j++)
@@ -48,7 +49,7 @@
                     {
                         num = rnd.Next(1, 5);
                     }
-                    while(used[num]);
+                    while (used[num]);
 
                     used[num] = true;
                     solution[row + i, col + j] = num;
@@ -56,6 +57,70 @@
             }
         }
 
+        private static bool FindEmpty(int[,] grid, out int row, out int col)
+        {
+            // Search for an empty cell
+            for (row = 0; row < 4; row++)
+                for (col = 0; col < 4; col++)
+                    if (grid[row, col] == 0)
+                    {
+                        return true;
+                    }
+
+            row = col = -1;
+            return false;
+        }
+
+        private static bool Solve4x4Suduko(int[,] grid)
+        {
+            // Find an empty cell
+            if(!FindEmpty(grid, out int row, out int col))
+            {
+                return true;
+            }
+
+            for (int num = 1; num  <= 4; num++)
+            {
+                if(IsSafe(grid, row, col, num))
+                {
+                    grid[row, col] = num;
+                    if (SolveSuduko(grid))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            grid[row, col] = 0;
+            return false;
+        }
+
+        internal static bool is4x4Solved(int[,] grid)
+        {
+            for (int r = 0; r < 4; r++)
+            {
+                for (int c = 0; c < 4; c++)
+                {
+                    int num = grid[r, c];
+
+                    if (num == 0)
+                    {
+                        return false;
+                    }
+
+                    grid[r, c] = 0;
+
+                    if (!IsSafe(grid, r, c, num))
+                    {
+                        grid[r, c] = num;
+                        return false;
+                    }
+
+                    grid[r, c] = num;
+                }
+            }
+            return true;
+        }
 
     }
 }

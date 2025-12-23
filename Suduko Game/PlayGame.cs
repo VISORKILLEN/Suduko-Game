@@ -29,7 +29,7 @@ namespace Suduko_Game
                 {
                     Console.Clear();
                     PrintBoard();
-                    Console.Write("\nRad 1-9, 0 för av avsluta: ");
+                    Console.WriteLine("\nRad 1-9, 0 för av avsluta: ");
 
                     if (!int.TryParse(Console.ReadLine(), out int r) || r < 0 || r > 9)
                     {
@@ -113,12 +113,19 @@ namespace Suduko_Game
 
         private static void PrintBoard()
         {
+            int boardWidth = 21;
+            int left = (Console.WindowWidth - boardWidth) / 2;
+
 
             for (int r = 0; r < 9; r++)
             {
+                Console.SetCursorPosition(left, Console.CursorTop);
+
                 if (r % 3 == 0 && r != 0)
                 {
                     Console.WriteLine("------+-------+------");
+                    Console.SetCursorPosition(left, Console.CursorTop);
+
                 }
 
                 for (int c = 0; c < 9; c++)
