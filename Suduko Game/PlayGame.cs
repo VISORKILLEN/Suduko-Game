@@ -73,32 +73,8 @@ namespace Suduko_Game
                 }
 
                 SolvedBoard();
-                RestartGame();
             }
         }
-
-        private static void RestartGame(bool playing = true)
-        {
-            Console.Write("Vill du spela igen? y/n: ");
-
-            string answer = Console.ReadLine().ToLower();
-
-            if (answer == "y")
-            {
-                Console.Clear();
-            }
-            else if (answer == "n")
-            {
-                Console.WriteLine("Tack för att du har spelat mitt suduko!");
-                playing = false;
-            }
-            else
-            {
-                Console.WriteLine("Felaktigt val, skriv igen.");
-            }
-
-        }
-
         private static void SolvedBoard()
         {
             if (SudukoGenerator.isSolved(board))

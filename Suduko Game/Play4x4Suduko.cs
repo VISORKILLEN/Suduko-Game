@@ -1,4 +1,11 @@
-﻿namespace Suduko_Game
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Suduko_Game
 {
     internal class Play4x4Suduko
     {
@@ -46,7 +53,7 @@
                         continue;
                     }
 
-                    if (SudukoGenerator.IsSafe(board, r - 1, c - 1, num))
+                    if (_4x4SudukoGenerator.Is4x4Safe(board, r - 1, c - 1, num))
                     {
                         board[r - 1, c - 1] = num;
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -65,40 +72,18 @@
                 }
 
                 SolvedBoard();
-                RestartGame();
             }
         }
 
         private static void SolvedBoard()
         {
-            if (SudukoGenerator.isSolved(board))
+            if (_4x4SudukoGenerator.is4x4Solved(board))
             {
                 Console.Clear();
                 PrintBoard();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Grattis! Du har löst Sudokut!");
                 Console.ResetColor();
-            }
-        }
-
-        private static void RestartGame(bool playing = true)
-        {
-            Console.Write("Vill du spela igen? y/n: ");
-
-            string answer = Console.ReadLine().ToLower();
-
-            if (answer == "y")
-            {
-                Console.Clear();
-            }
-            else if (answer == "n")
-            {
-                Console.WriteLine("Tack för att du har spelat mitt suduko!");
-                playing = false;
-            }
-            else
-            {
-                Console.WriteLine("Felaktigt val, skriv igen.");
             }
         }
 
@@ -109,7 +94,7 @@
 
                 if (r % 2 == 0 && r != 0)
                 {
-                    Console.WriteLine("------+-------+------");
+                    Console.WriteLine("--+--");
                 }
 
                 for (int c = 0; c < 4; c++)
