@@ -14,7 +14,7 @@ namespace Suduko_Game
 
             while (playing)
             {
-                //Console.Clear();
+                Console.Clear();
 
                 Console.WriteLine("Välkommen till spelkonsolen\n" +
                     "Vilket typ av Suduko vill du köra?\n" +
@@ -30,6 +30,51 @@ namespace Suduko_Game
                 {
                     case 1:
                         Play4x4Suduko.Run4x4();
+                        break;
+
+                    case 2:
+                        Print9x9Menu();
+                        break;
+
+                    case 3:
+
+                        break;
+
+                    case 0:
+                        playing = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Felaktig inmating\n" +
+                            "Tryck på valfri knapp för att gå tillbaka till menyn.");
+                        Console.ReadLine();
+                        break;
+
+                }
+            }
+        }
+
+        internal static void Print9x9Menu()
+        {
+            bool playing = true;
+
+            while (playing)
+            {
+                Console.Clear();
+
+                Console.WriteLine("Vilken svårighetsgrad vill du ha på ditt Suduko?\n" +
+                    "\n1. Enkelt\n" +
+                    "2. Mellan\n" +
+                    "3. Svårt\n" +
+                    "0. Gå tillbaka till vanliga menyn.");
+
+                int choice;
+                int.TryParse(Console.ReadLine(), out choice);
+
+                switch (choice)
+                {
+                    case 1:
+                        Easy9x9Suduko.PlayEasySuduko();
                         break;
 
                     case 2:
@@ -49,7 +94,6 @@ namespace Suduko_Game
                             "Tryck på valfri knapp för att gå tillbaka till menyn.");
                         Console.ReadLine();
                         break;
-
                 }
             }
         }
