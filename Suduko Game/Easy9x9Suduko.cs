@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Suduko_Game
 {
-    internal class PlayGame
+    internal class Easy9x9Suduko : PlayGame
     {
-
-        static int[,] mediumBoard = SudukoGenerator.GenerateSuduko(40);
+        static int[,] easyBoard = SudukoGenerator.GenerateSuduko(25);
         internal static void Run()
         {
-            PlaySuduko();
+            PlayEasySuduko();
         }
 
 
-        internal static void PlaySuduko()
+        internal static void PlayEasySuduko()
         {
             bool playing = true;
 
@@ -26,7 +24,7 @@ namespace Suduko_Game
                 Console.Clear();
 
                 bool gameRunning = true;
-                while (gameRunning && !SudukoGenerator.isSolved(mediumBoard))
+                while (gameRunning && !SudukoGenerator.isSolved(easyBoard))
                 {
                     Console.Clear();
                     PrintBoard();
@@ -55,9 +53,9 @@ namespace Suduko_Game
                         continue;
                     }
 
-                    if (SudukoGenerator.IsSafe(mediumBoard, r - 1, c - 1, num))
+                    if (SudukoGenerator.IsSafe(easyBoard, r - 1, c - 1, num))
                     {
-                        mediumBoard[r - 1, c - 1] = num;
+                        easyBoard[r - 1, c - 1] = num;
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Siffra placerad");
                         Console.ResetColor();
@@ -77,39 +75,5 @@ namespace Suduko_Game
             }
         }
 
-        internal static void SolvedBoard()
-        {
-            if (SudukoGenerator.isSolved(mediumBoard))
-            {
-                Console.Clear();
-                PrintBoard();
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("Grattis! Du har löst Sudokut!");
-                Console.ResetColor();
-            }
-        }
-
-        internal static void PrintBoard()
-        {
-            for (int r = 0; r < 9; r++)
-            {
-
-                if (r % 3 == 0 && r != 0)
-                {
-                    Console.WriteLine("------+-------+------");
-                }
-
-                for (int c = 0; c < 9; c++)
-                {
-                    if (c % 3 == 0 && c != 0)
-                    {
-                        Console.Write("| ");
-                    }
-                    int val = mediumBoard[r, c];
-                    Console.Write(val == 0 ? ". " : val + " ");
-                }
-                Console.WriteLine();
-            }
-        }
     }
 }

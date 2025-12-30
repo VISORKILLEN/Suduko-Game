@@ -11,7 +11,7 @@ namespace Suduko_Game
     {
         static int[,] board = _4x4SudukoGenerator.Generate4x4Suduko();
 
-        internal static void Run()
+        internal static void Run4x4()
         {
             Play4x4SudukoGame();
         }
