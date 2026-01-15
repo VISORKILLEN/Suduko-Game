@@ -8,6 +8,8 @@ namespace Suduko_Game
 {
     internal class Menu
     {
+
+        // Main menu for Suduko game
         internal static void SudukoMenu()
         {
             bool playing = true;
@@ -58,6 +60,7 @@ namespace Suduko_Game
         {
             bool playing = true;
 
+            // Menu for 9x9 Suduko
             while (playing)
             {
                 Console.Clear();

@@ -84,6 +84,8 @@ namespace Suduko_Game
             {
                 return true;
             }
+
+            // Try numbers 1-9
             for (int num = 1; num <= 9; num++)
             {
                 if (IsSafe(grid, row, col, num))
@@ -100,10 +102,12 @@ namespace Suduko_Game
             return false;
         }
 
+        // Check if the Sudoku is solved
         internal static bool isSolved(int[,] grid)
         {
             for (int r = 0; r < 9; r++)
             {
+                // Check each cell
                 for (int c = 0; c < 9; c++)
                 {
                     int num = grid[r, c];
@@ -115,6 +119,7 @@ namespace Suduko_Game
 
                     grid[r, c] = 0;
 
+                    // Check if the number placement is valid
                     if (!IsSafe(grid, r, c, num))
                     {
                         grid[r, c] = num;
@@ -127,7 +132,7 @@ namespace Suduko_Game
             return true;
         }
 
-        //
+        // Check if placing num at grid[row, col] is valid
         internal static bool IsSafe(int[,] grid, int row, int col, int num)
         {
             for (int c = 0; c < 9; c++)
@@ -164,7 +169,7 @@ namespace Suduko_Game
             return true;
         }
 
-        //
+        // Remove cells to create the puzzle
         private static void RemoveCells(int count)
         {
             while (count > 0)

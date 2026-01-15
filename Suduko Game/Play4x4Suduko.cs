@@ -27,6 +27,7 @@ namespace Suduko_Game
                 bool gameRunning = true;
                 while (gameRunning && !_4x4SudukoGenerator.is4x4Solved(board))
                 {
+                    // Print board and get user input
                     Console.Clear();
                     PrintBoard();
                     Console.WriteLine("Rad 1-4, 0 för att avluta:");
@@ -35,24 +36,28 @@ namespace Suduko_Game
                         continue;
                     }
 
+                    // Exit game
                     if (r == 0)
                     {
                         gameRunning = false;
                         break;
                     }
 
+                    // Get column to place
                     Console.Write("Kolumn (1-4): ");
                     if (!int.TryParse(Console.ReadLine(), out int c) || c < 1 || c > 4)
                     {
                         continue;
                     }
 
+                    // Get number to place
                     Console.Write("Siffra (1-4): ");
                     if (!int.TryParse(Console.ReadLine(), out int num) || num < 1 || num > 4)
                     {
                         continue;
                     }
 
+                    // Valid placement
                     if (_4x4SudukoGenerator.Is4x4Safe(board, r - 1, c - 1, num))
                     {
                         board[r - 1, c - 1] = num;
@@ -60,6 +65,8 @@ namespace Suduko_Game
                         Console.WriteLine("Siffra placerad");
                         Console.ResetColor();
                     }
+
+                    // Invalid placement
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -71,10 +78,18 @@ namespace Suduko_Game
                     Console.ReadKey();
                 }
 
-                SolvedBoard();
+                // Controlle if board is solved
+                if (SudukoGenerator.isSolved(board))
+                {
+                    SolvedBoard();
+                    Console.WriteLine("Tryck på valfri tanget för att återgå till menyn.");
+                    Console.ReadKey();
+                    playing = false;
+                }
             }
         }
 
+        // Handle solved board
         private static void SolvedBoard()
         {
             if (_4x4SudukoGenerator.is4x4Solved(board))
@@ -89,16 +104,18 @@ namespace Suduko_Game
             }
         }
 
+        // Print the 4x4 board
         private static void PrintBoard()
         {
             for (int r = 0; r < 4; r++)
             {
-
+                // Print horizontal separator
                 if (r % 2 == 0 && r != 0)
                 {
                     Console.WriteLine("----+----");
                 }
 
+                // Print each cell in the row
                 for (int c = 0; c < 4; c++)
                 {
                     if (c % 2 == 0 && c != 0)
