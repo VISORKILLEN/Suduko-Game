@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Suduko_Game
+﻿namespace Suduko_Game
 {
     internal class Easy9x9Suduko : PlayGame
     {
-        static int[,] easyBoard = SudukoGenerator.GenerateSuduko(25);
-        internal static void Run()
+        static int[,] board = SudukoGenerator.GenerateSuduko(20);
+        internal static void RunEasy()
         {
             PlayEasySuduko();
         }
 
-
+        // Play easy 9x9 Suduko game
         internal static void PlayEasySuduko()
         {
             bool playing = true;
@@ -24,7 +18,7 @@ namespace Suduko_Game
                 Console.Clear();
 
                 bool gameRunning = true;
-                while (gameRunning && !SudukoGenerator.isSolved(easyBoard))
+                while (gameRunning && !SudukoGenerator.isSolved(board))
                 {
                     Console.Clear();
                     PrintBoard();
@@ -53,9 +47,9 @@ namespace Suduko_Game
                         continue;
                     }
 
-                    if (SudukoGenerator.IsSafe(easyBoard, r - 1, c - 1, num))
+                    if (SudukoGenerator.IsSafe(board, r - 1, c - 1, num))
                     {
-                        easyBoard[r - 1, c - 1] = num;
+                        board[r - 1, c - 1] = num;
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Siffra placerad");
                         Console.ResetColor();
@@ -72,7 +66,7 @@ namespace Suduko_Game
                 }
 
                 // Controlle if board is solved
-                if (SudukoGenerator.isSolved(easyBoard))
+                if (SudukoGenerator.isSolved(board))
                 {
                     SolvedBoard();
                     Console.WriteLine("Tryck på valfri tanget för att återgå till menyn.");
@@ -81,6 +75,5 @@ namespace Suduko_Game
                 }
             }
         }
-
     }
 }

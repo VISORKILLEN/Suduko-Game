@@ -77,7 +77,7 @@ namespace Suduko_Game
                 switch (choice)
                 {
                     case 1:
-                        Easy9x9Suduko.PlayEasySuduko();
+                        Easy9x9Suduko.RunEasy();
                         break;
 
                     case 2:
@@ -85,7 +85,7 @@ namespace Suduko_Game
                         break;
 
                     case 3:
-
+                        Hard9x9Suduko.RunHard();
                         break;
 
                     case 0:

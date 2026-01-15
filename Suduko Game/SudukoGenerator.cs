@@ -8,7 +8,7 @@ namespace Suduko_Game
         static int[,] puzzle = new int[9, 9];
         static Random rnd = new Random();
 
-        internal static int[,] GenerateSuduko(int removeCount = 40)
+        internal static int[,] GenerateSuduko(int removeCount)
         {
             // Initialize grids
             Array.Clear(solution, 0, solution.Length);
