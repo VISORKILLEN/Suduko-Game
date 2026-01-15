@@ -71,7 +71,14 @@ namespace Suduko_Game
                     Console.ReadKey();
                 }
 
-                SolvedBoard();
+                // Controlle if board is solved
+                if (SudukoGenerator.isSolved(easyBoard))
+                {
+                    SolvedBoard();
+                    Console.WriteLine("Tryck på valfri tanget för att återgå till menyn.");
+                    Console.ReadKey();
+                    playing = false;
+                }
             }
         }
 
