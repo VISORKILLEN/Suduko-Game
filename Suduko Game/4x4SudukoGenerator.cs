@@ -6,7 +6,7 @@
         static int[,] puzzle = new int[4, 4];
         static Random rnd = new Random();
 
-        internal static int[,] Generate4x4Suduko(int removeCount = 10)
+        internal static int[,] Generate4x4Suduko(int removeCount = 9)
         {
             Array.Clear(solution, 0, solution.Length);
             Array.Clear(puzzle, 0, puzzle.Length);
@@ -29,7 +29,7 @@
 
         private static void FillDiagonal()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i += 2)
             {
                 FillBox(i, i);
             }
@@ -74,14 +74,14 @@
         private static bool Solve4x4Suduko(int[,] grid)
         {
             // Find an empty cell
-            if(!FindEmpty(grid, out int row, out int col))
+            if (!FindEmpty(grid, out int row, out int col))
             {
                 return true;
             }
 
-            for (int num = 1; num  <= 4; num++)
+            for (int num = 1; num <= 4; num++)
             {
-                if(IsSafe(grid, row, col, num))
+                if (Is4x4Safe(grid, row, col, num))
                 {
                     grid[row, col] = num;
                     if (Solve4x4Suduko(grid))
@@ -110,7 +110,7 @@
 
                     grid[r, c] = 0;
 
-                    if (!IsSafe(grid, r, c, num))
+                    if (!Is4x4Safe(grid, r, c, num))
                     {
                         grid[r, c] = num;
                         return false;
@@ -124,7 +124,7 @@
 
 
         //Method to check if 
-        internal static bool IsSafe(int[,] grid, int row, int col, int num)
+        internal static bool Is4x4Safe(int[,] grid, int row, int col, int num)
         {
             // Check if the number already exists in the same row
             for (int c = 0; c < 4; c++)
@@ -178,4 +178,5 @@
             }
 
         }
+    }
 }

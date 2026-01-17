@@ -1,17 +1,22 @@
-﻿namespace Suduko_Game
-{
-    internal class PlayGame
-    {
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-        // Medium 9x9 Suduko board
-        static int[,] board = SudukoGenerator.GenerateSuduko(40);
-        internal static void Run()
+namespace Suduko_Game
+{
+    internal class Play4x4Suduko
+    {
+        static int[,] board = _4x4SudukoGenerator.Generate4x4Suduko();
+
+        internal static void Run4x4()
         {
-            PlaySuduko();
+            Play4x4SudukoGame();
         }
 
-        // Play 9x9 Suduko game
-        internal static void PlaySuduko()
+        internal static void Play4x4SudukoGame()
         {
             bool playing = true;
 
@@ -19,50 +24,49 @@
             {
                 Console.Clear();
 
-                // Print initial board
                 bool gameRunning = true;
-                while (gameRunning && !SudukoGenerator.isSolved(board))
+                while (gameRunning && !_4x4SudukoGenerator.is4x4Solved(board))
                 {
-                    // Display board and prompt
+                    // Print board and get user input
                     Console.Clear();
                     PrintBoard();
-                    Console.WriteLine("\nRad 1-9, 0 för att avsluta: ");
-
-                    // Get row input
-                    if (!int.TryParse(Console.ReadLine(), out int r) || r < 0 || r > 9)
+                    Console.WriteLine("Rad 1-4, 0 för att avluta:");
+                    if (!int.TryParse(Console.ReadLine(), out int r) || r < 0 || r > 4)
                     {
                         continue;
                     }
 
-                    // Exit game if 0
+                    // Exit game
                     if (r == 0)
                     {
                         gameRunning = false;
                         break;
                     }
 
-                    // Get column and number input
-                    Console.Write("Kolumn (1-9): ");
-                    if (!int.TryParse(Console.ReadLine(), out int c) || c < 1 || c > 9)
+                    // Get column to place
+                    Console.Write("Kolumn (1-4): ");
+                    if (!int.TryParse(Console.ReadLine(), out int c) || c < 1 || c > 4)
                     {
                         continue;
                     }
 
-                    // Get number input
-                    Console.Write("Siffra (1-9): ");
-                    if (!int.TryParse(Console.ReadLine(), out int num) || num < 1 || num > 9)
+                    // Get number to place
+                    Console.Write("Siffra (1-4): ");
+                    if (!int.TryParse(Console.ReadLine(), out int num) || num < 1 || num > 4)
                     {
                         continue;
                     }
 
-                    // Place number if valid
-                    if (SudukoGenerator.IsSafe(board, r - 1, c - 1, num))
+                    // Valid placement
+                    if (_4x4SudukoGenerator.Is4x4Safe(board, r - 1, c - 1, num))
                     {
                         board[r - 1, c - 1] = num;
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Siffra placerad");
                         Console.ResetColor();
                     }
+
+                    // Invalid placement
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -74,7 +78,7 @@
                     Console.ReadKey();
                 }
 
-                // Check if the board is solved
+                // Controlle if board is solved
                 if (SudukoGenerator.isSolved(board))
                 {
                     SolvedBoard();
@@ -85,36 +89,36 @@
             }
         }
 
-        // Display solved message
-        internal static void SolvedBoard()
+        // Handle solved board
+        private static void SolvedBoard()
         {
-            if (SudukoGenerator.isSolved(board))
+            if (_4x4SudukoGenerator.is4x4Solved(board))
             {
                 Console.Clear();
                 PrintBoard();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Grattis! Du har löst Sudokut!");
                 Console.ResetColor();
+                Console.WriteLine("Tryck på valfri knapp för att gå tillbaka till menyn.");
+                Console.ReadLine();
             }
         }
 
-        // Print the current state of the board
-        internal static void PrintBoard()
+        // Print the 4x4 board
+        private static void PrintBoard()
         {
-            // Print the 9x9 Suduko board
-            for (int r = 0; r < 9; r++)
+            for (int r = 0; r < 4; r++)
             {
-
                 // Print horizontal separator
-                if (r % 3 == 0 && r != 0)
+                if (r % 2 == 0 && r != 0)
                 {
-                    Console.WriteLine("------+-------+------");
+                    Console.WriteLine("----+----");
                 }
 
-                // Print each row
-                for (int c = 0; c < 9; c++)
+                // Print each cell in the row
+                for (int c = 0; c < 4; c++)
                 {
-                    if (c % 3 == 0 && c != 0)
+                    if (c % 2 == 0 && c != 0)
                     {
                         Console.Write("| ");
                     }
@@ -122,7 +126,9 @@
                     Console.Write(val == 0 ? ". " : val + " ");
                 }
                 Console.WriteLine();
+
             }
+
         }
     }
 }
