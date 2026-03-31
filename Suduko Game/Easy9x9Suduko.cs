@@ -1,10 +1,10 @@
 ﻿namespace Suduko_Game
 {
-    internal class Easy9x9Suduko : PlayGame
+    internal class Easy9x9Suduko : SudukoBoard
     {
-        static int[,] board = SudukoGenerator.GenerateSuduko(20);
         internal static void RunEasy()
         {
+            board = SudukoGenerator.GenerateSuduko(20);
             PlayEasySuduko();
         }
 
@@ -24,6 +24,7 @@
                     PrintBoard();
                     Console.WriteLine("\nRad 1-9, 0 för att avsluta: ");
 
+                    // Get user input for row, column and number
                     if (!int.TryParse(Console.ReadLine(), out int r) || r < 0 || r > 9)
                     {
                         continue;
@@ -35,18 +36,21 @@
                         break;
                     }
 
+                    // Get user input for column
                     Console.Write("Kolumn (1-9): ");
                     if (!int.TryParse(Console.ReadLine(), out int c) || c < 1 || c > 9)
                     {
                         continue;
                     }
 
+                    // Get user input for number
                     Console.Write("Siffra (1-9): ");
                     if (!int.TryParse(Console.ReadLine(), out int num) || num < 1 || num > 9)
                     {
                         continue;
                     }
 
+                    // Check if the number can be placed in the specified position
                     if (SudukoGenerator.IsSafe(board, r - 1, c - 1, num))
                     {
                         board[r - 1, c - 1] = num;
@@ -77,3 +81,4 @@
         }
     }
 }
+
