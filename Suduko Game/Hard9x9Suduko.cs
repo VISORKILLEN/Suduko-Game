@@ -1,10 +1,10 @@
 ﻿namespace Suduko_Game
 {
-    internal class Hard9x9Suduko : PlayGame
+    internal class Hard9x9Suduko : SudukoBoard
     {
-        static int[,] board = SudukoGenerator.GenerateSuduko(55);
         internal static void RunHard()
         {
+            board = SudukoGenerator.GenerateSuduko(55);
             PlayHardSuduko();
         }
 

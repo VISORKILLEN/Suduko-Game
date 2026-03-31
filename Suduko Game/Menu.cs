@@ -58,10 +58,10 @@ namespace Suduko_Game
 
         internal static void Print9x9Menu()
         {
-            bool playing = true;
+            bool playing9x9 = true;
 
             // Menu for 9x9 Suduko
-            while (playing)
+            while (playing9x9)
             {
                 Console.Clear();
 
@@ -89,7 +89,7 @@ namespace Suduko_Game
                         break;
 
                     case 0:
-                        playing = false;
+                        playing9x9 = false;
                         break;
 
                     default:
